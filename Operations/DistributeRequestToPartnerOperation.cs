@@ -39,6 +39,18 @@ namespace TaparSolution.Operations
                     }
                     #endregion
 
+                    #region creating compotition
+                    ReqResCompositionTable compotition = new ReqResCompositionTable()
+                    {
+                        compid = UniqueGeneratorHelper.UUDGenerate(),
+                        partnerid = p.partnerid,
+                        price = price,
+                        requestid = currentrequest.requestid,
+                    };
+
+                  await  Parameter._db.SaveOrUpdateReqRespCompotition(compotition);
+                    #endregion
+
                     using (PutQueueTheRequestOperation op = new())
                     {
                         var result = await op.ExecuteAsync(new ()
@@ -47,11 +59,10 @@ namespace TaparSolution.Operations
                             queue = new QueueTable()
                             {
                                 queueid = UniqueGeneratorHelper.UUDGenerate(),
-                                partnerid = p.partnerid,
+                                type = QueueTypeEnum.DistributionToPartner,
                                 proccess_after = DateTImeHelper.GetCurrentDate().AddMinutes(p.rate),
-                                price = price,
-                                requestid = currentrequest.requestid,
-                                status = queuestatus.created
+                                status = queuestatus.created,
+                                identifier = compotition.compid
 
                             }
                         });

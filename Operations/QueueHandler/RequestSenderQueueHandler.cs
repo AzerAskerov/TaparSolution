@@ -35,7 +35,9 @@ namespace TaparSolution.Operations.QueueHandler
             foreach (var _q in queues)
             {
                 Result.AddInformation("inside queue");
-                var currentrequest =  db.GetRequestByOid(_q.requestid).Result;
+                var currentcompotition = db.GetReqRespCompotitionByOid(_q.identifier).Result;
+                var currentrequest =  db.GetRequestByOid(currentcompotition.requestid).Result;
+                var currentpartner = db.GetPartnerByUserId(currentcompotition.partnerid).Result.FirstOrDefault();
                 Result.AddInformation("got request");
                 //  //bundling request for partners
                 string info = $"*Ehtiyyat Hissəsinin məlumatlari*: \n" +
@@ -54,22 +56,23 @@ namespace TaparSolution.Operations.QueueHandler
 
 
                 // partnerbundle.chat_id =
-                Texpassport.chat_id = _q.partnerid.ToString();
+                Texpassport.chat_id = currentcompotition.partnerid.ToString();
 
                 //TODO add buttons: Var, yoxdur, sikayet et, soz sorus
                 //
 
 
-                Result.AddInformation("before send message");
+              
                 //send bundled reuqest message
                 SendMessageResponse response=  WebClient.SendMessagePostAsync<SendMessageResponse>(Texpassport, "sendPhoto", WebClient.Partnerbottoken).Result;
                 if (response.ok)
                 {
                     _q.status = queuestatus.success;
                     _q.proccededTime = DateTImeHelper.GetCurrentDate();
-                    Parameter._db.SaveOrUpdateQueue(_q);
+                    Parameter._db.SaveOrUpdateQueue(_q).Wait();
                     //TODO Deduct Partner Balance
-
+                    currentpartner.balance -= currentcompotition.price;
+                    Parameter._db.SaveOrUpdatePartner(currentpartner).Wait();
                 }
                 else
                     Result.AddInformation($"send response error: {response.result.text}");

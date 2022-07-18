@@ -58,6 +58,11 @@ namespace TaparSolution
             await _context.SaveAsync(partner);
         }
 
+        public async Task SaveOrUpdateReqRespCompotition(ReqResCompositionTable compotition)
+        {
+            await _context.SaveAsync(compotition);
+        }
+
         public async Task SaveOrUpdateQueue(QueueTable _queue)
         {
            await _context.SaveAsync(_queue);
@@ -66,6 +71,10 @@ namespace TaparSolution
         public async Task<ClientRequestTable> GetRequestByOid(long req_oid)
         {
            return await _context.LoadAsync<ClientRequestTable>(req_oid);
+        }
+        public async Task<ReqResCompositionTable> GetReqRespCompotitionByOid(long comp_oid)
+        {
+            return await _context.LoadAsync<ReqResCompositionTable>(comp_oid);
         }
 
         public async Task<List<Brandtable>> GetBrandList( string searchString)
@@ -145,7 +154,11 @@ namespace TaparSolution
         (nameof(PartnerTable.region),
         ScanOperator.In,
         objectValues
-            )
+            ),
+        new ScanCondition
+        (nameof(PartnerTable.balance),
+        ScanOperator.GreaterThan,
+        0)
      }
    );
 

@@ -12,11 +12,12 @@ namespace TaparSolution.Models.DBTable
             set;
         }
         public DateTime  proccess_after { get; set; }
-        public long requestid { get; set; }
-        public long partnerid  { get; set; }
+      
         public queuestatus  status { get; set; }
-        public int price { get; set; }
+      
         public DateTime? proccededTime { get; set; }
+        public QueueTypeEnum type { get; set; }
+        public long identifier { get; set; }
     }
 
     public enum queuestatus
@@ -24,5 +25,9 @@ namespace TaparSolution.Models.DBTable
         created=0,
         success=1,
         error=2
+    }
+   public enum QueueTypeEnum
+    {
+        DistributionToPartner=1, // identifier of this queue is reqrescompotition id.
     }
 }

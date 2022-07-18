@@ -16,6 +16,7 @@ namespace TaparSolution.Controllers
  start - servisi yenidən başlatmaq
  stop -  servisi müvəqqəti dayandırmaq
  balans - qalan balansı göstər
+ addbalans - balans artırmaq
  subscribe - yeni markaya üzv olmaq
  unsubscribe - üzv olduğum markanı ləğv etmək
  register - partnyor olmaq üçün qeydiyyat
