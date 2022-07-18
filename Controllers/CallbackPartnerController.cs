@@ -1,15 +1,15 @@
 ﻿using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
 using Amazon.Lambda.Core;
-using AWSServerless2.Helpers;
-using AWSServerless2.Models;
-using AWSServerless2.Models.DBTable;
+using TaparSolution.Helpers;
+using TaparSolution.Models;
+using TaparSolution.Models.DBTable;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Text;
 
-namespace AWSServerless2.Controllers
+namespace TaparSolution.Controllers
 {
 
     /*

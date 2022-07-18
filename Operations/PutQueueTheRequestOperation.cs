@@ -1,7 +1,7 @@
-﻿using AWSServerless2.Models.DBTable;
+﻿using TaparSolution.Models.DBTable;
 using Microsoft.Extensions.Options;
 
-namespace AWSServerless2.Operations
+namespace TaparSolution.Operations
 {
     public class PutQueueTheRequestOperation : BaseOperation<PutQueueTheRequestOperationModel>
     {

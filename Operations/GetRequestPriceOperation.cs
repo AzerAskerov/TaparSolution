@@ -1,6 +1,6 @@
-﻿using AWSServerless2.Models.DBTable;
+﻿using TaparSolution.Models.DBTable;
 
-namespace AWSServerless2.Operations
+namespace TaparSolution.Operations
 {
     public class GetRequestPriceOperation : BaseOperation<GetRequestPriceModel>
     {

@@ -7,7 +7,7 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {},
     ".NETCoreApp,Version=v6.0/linux-x64": {
-      "AWSServerless2/1.0.0": {
+      "TaparSolution/1.0.0": {
         "dependencies": {
           "AWSSDK.Core": "3.7.12.9",
           "AWSSDK.DynamoDBv2": "3.7.3.57",
@@ -16,7 +16,7 @@
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
-          "AWSServerless2.dll": {}
+          "TaparSolution.dll": {}
         }
       },
       "Amazon.Lambda.APIGatewayEvents/2.4.1": {
@@ -166,7 +166,7 @@
     }
   },
   "libraries": {
-    "AWSServerless2/1.0.0": {
+    "TaparSolution/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

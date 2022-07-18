@@ -2,14 +2,14 @@
 using Amazon.DynamoDBv2;
 using Microsoft.Extensions.Options;
 using Amazon;
-using AWSServerless2.Models.DBTable;
+using TaparSolution.Models.DBTable;
 using Amazon.DynamoDBv2.DocumentModel;
 using System.Collections.Generic;
 using Amazon.DynamoDBv2.Model;
 using Amazon.Runtime;
-using AWSServerless2.Helpers;
+using TaparSolution.Helpers;
 
-namespace AWSServerless2
+namespace TaparSolution
 {
     public class DynamoDbClient 
     {

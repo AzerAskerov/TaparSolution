@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "AWSServerless2": {
+    "TaparSolution": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

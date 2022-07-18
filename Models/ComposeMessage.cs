@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace AWSServerless2.Models
+namespace TaparSolution.Models
 {
     public class ComposeMessage
     {

@@ -1,4 +1,4 @@
-﻿namespace AWSServerless2
+﻿namespace TaparSolution
 {
     public enum originEnum
 

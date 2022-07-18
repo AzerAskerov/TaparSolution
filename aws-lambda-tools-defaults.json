@@ -9,7 +9,7 @@
     "profile"     : "default",
     "region"      : "us-east-2",
     "configuration" : "Release",
-    "s3-prefix"     : "AWSServerless2/",
+    "s3-prefix"     : "TaparSolution/",
     "template"      : "serverless.template",
     "template-parameters" : "",
     "s3-bucket"           : "elasticbeanstalk-us-east-2-138247774131",

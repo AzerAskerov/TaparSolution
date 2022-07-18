@@ -58,12 +58,12 @@ If already installed check if new version is available.
 
 Execute unit tests
 ```
-    cd "AWSServerless2/test/AWSServerless2.Tests"
+    cd "TaparSolution/test/TaparSolution.Tests"
     dotnet test
 ```
 
 Deploy application
 ```
-    cd "AWSServerless2/src/AWSServerless2"
+    cd "TaparSolution/src/TaparSolution"
     dotnet lambda deploy-serverless
 ```

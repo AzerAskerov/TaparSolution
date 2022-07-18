@@ -1,7 +1,7 @@
-using AWSServerless2.Models;
+using TaparSolution.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AWSServerless2.Controllers;
+namespace TaparSolution.Controllers;
 
 [Route("api/[controller]")]
 public class ValuesController : ControllerBase

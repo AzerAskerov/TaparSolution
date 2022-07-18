@@ -841,11 +841,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\My Drive\\Tapar\\Telegram_approach\\AWSServerless2\\AWSServerless2.csproj",
-      "projectName": "AWSServerless2",
-      "projectPath": "G:\\My Drive\\Tapar\\Telegram_approach\\AWSServerless2\\AWSServerless2.csproj",
+      "projectUniqueName": "C:\\Users\\asgaroff\\source\\repos\\TaparSolution\\TaparSolution.csproj",
+      "projectName": "TaparSolution",
+      "projectPath": "C:\\Users\\asgaroff\\source\\repos\\TaparSolution\\TaparSolution.csproj",
       "packagesPath": "C:\\Users\\asgaroff\\.nuget\\packages\\",
-      "outputPath": "G:\\My Drive\\Tapar\\Telegram_approach\\AWSServerless2\\obj\\",
+      "outputPath": "C:\\Users\\asgaroff\\source\\repos\\TaparSolution\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

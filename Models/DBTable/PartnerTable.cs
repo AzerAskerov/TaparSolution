@@ -1,6 +1,6 @@
 ﻿using Amazon.DynamoDBv2.DataModel;
 
-namespace AWSServerless2.Models.DBTable
+namespace TaparSolution.Models.DBTable
 {
     [DynamoDBTable("Partners")]
     public class PartnerTable

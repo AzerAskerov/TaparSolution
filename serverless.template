@@ -8,7 +8,7 @@
     "AspNetCoreFunction": {
       "Type": "AWS::Serverless::Function",
       "Properties": {
-        "Handler": "AWSServerless2::AWSServerless2.LambdaEntryPoint::FunctionHandlerAsync",
+        "Handler": "TaparSolution::TaparSolution.LambdaEntryPoint::FunctionHandlerAsync",
         "Runtime": "dotnet6",
         "CodeUri": "",
         "MemorySize": 256,

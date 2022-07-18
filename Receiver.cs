@@ -1,6 +1,6 @@
-﻿using AWSServerless2.Models;
+﻿using TaparSolution.Models;
 
-namespace AWSServerless2
+namespace TaparSolution
 {
     public class Receiver
     {

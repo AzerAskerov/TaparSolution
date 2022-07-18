@@ -1,9 +1,9 @@
-﻿using AWSServerless2.Models;
-using AWSServerless2.Models.DBTable;
+﻿using TaparSolution.Models;
+using TaparSolution.Models.DBTable;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-namespace AWSServerless2.Controllers
+namespace TaparSolution.Controllers
 {
     [Route("api/[controller]")]
     public class CallbackAdminController : ControllerBase

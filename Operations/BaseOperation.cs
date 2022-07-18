@@ -1,5 +1,5 @@
 ﻿
-namespace AWSServerless2.Operations
+namespace TaparSolution.Operations
 {
     public abstract class BaseOperation<T> : IDisposable where T : BaseOperationModel
     {

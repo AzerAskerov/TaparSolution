@@ -1,4 +1,4 @@
-﻿namespace AWSServerless2.Helpers
+﻿namespace TaparSolution.Helpers
 {
     public static class DateTImeHelper
     {

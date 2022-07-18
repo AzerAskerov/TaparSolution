@@ -1,10 +1,10 @@
 ﻿using Amazon.DynamoDBv2;
-using AWSServerless2.Helpers;
-using AWSServerless2.Models;
-using AWSServerless2.Models.DBTable;
+using TaparSolution.Helpers;
+using TaparSolution.Models;
+using TaparSolution.Models.DBTable;
 using Microsoft.Extensions.Options;
 
-namespace AWSServerless2.Operations.QueueHandler
+namespace TaparSolution.Operations.QueueHandler
 {
     public class RequestSenderQueueHandler : BaseOperation<RequestSenderQueueHandlerModel>
     {

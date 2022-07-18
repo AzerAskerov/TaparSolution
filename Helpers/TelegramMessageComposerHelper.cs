@@ -1,6 +1,6 @@
-﻿using AWSServerless2.Models;
+﻿using TaparSolution.Models;
 
-namespace AWSServerless2.Helpers
+namespace TaparSolution.Helpers
 {
     public static class TelegramMessageComposerHelper
     {

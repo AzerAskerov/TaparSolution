@@ -1,4 +1,4 @@
-﻿namespace AWSServerless2.Models
+﻿namespace TaparSolution.Models
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
 

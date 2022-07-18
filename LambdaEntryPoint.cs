@@ -1,14 +1,14 @@
 using Amazon.Lambda.Core;
 using Amazon.Lambda.Serialization.SystemTextJson;
-using AWSServerless2.Models;
+using TaparSolution.Models;
 
-namespace AWSServerless2;
+namespace TaparSolution;
 
 /// <summary>
 /// This class extends from APIGatewayProxyFunction which contains the method FunctionHandlerAsync which is the 
 /// actual Lambda function entry point. The Lambda handler field should be set to
 /// 
-/// AWSServerless2::AWSServerless2.LambdaEntryPoint::FunctionHandlerAsync
+/// TaparSolution::TaparSolution.LambdaEntryPoint::FunctionHandlerAsync
 /// </summary>
 public class LambdaEntryPoint :
 

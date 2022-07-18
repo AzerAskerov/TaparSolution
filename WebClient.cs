@@ -1,8 +1,8 @@
-﻿using AWSServerless2.Models;
+﻿using TaparSolution.Models;
 using Newtonsoft.Json;
 using System.Text;
 
-namespace AWSServerless2
+namespace TaparSolution
 {
     public class WebClient
     {

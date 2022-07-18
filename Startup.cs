@@ -1,10 +1,10 @@
 using Amazon.DynamoDBv2;
-using AWSServerless2.Models;
-using AWSServerless2.Operations;
-using AWSServerless2.Operations.QueueHandler;
+using TaparSolution.Models;
+using TaparSolution.Operations;
+using TaparSolution.Operations.QueueHandler;
 using Microsoft.Extensions.Options;
 
-namespace AWSServerless2;
+namespace TaparSolution;
 
 public class Startup
 {

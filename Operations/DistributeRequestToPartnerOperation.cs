@@ -1,8 +1,8 @@
-﻿using AWSServerless2.Helpers;
-using AWSServerless2.Models;
-using AWSServerless2.Models.DBTable;
+﻿using TaparSolution.Helpers;
+using TaparSolution.Models;
+using TaparSolution.Models.DBTable;
 
-namespace AWSServerless2.Operations
+namespace TaparSolution.Operations
 {
     public class DistributeRequestToPartnerOperation : BaseOperation<DistributeRequestToPartnerModel>
     {
