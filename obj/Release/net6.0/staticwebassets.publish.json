@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "0yoCPK17UEFm0cbWJPQTijNCmGan6PtF93zS0mUa5sA=",
+  "Source": "AWSServerless2",
+  "BasePath": "_content/AWSServerless2",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

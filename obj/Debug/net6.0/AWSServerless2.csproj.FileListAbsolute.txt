@@ -1,0 +1,65 @@
+C:\Users\asgaroff\source\repos\AWSServerless2\obj\Debug\net6.0\AWSServerless2.csproj.AssemblyReference.cache
+C:\Users\asgaroff\source\repos\AWSServerless2\obj\Debug\net6.0\AWSServerless2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\asgaroff\source\repos\AWSServerless2\obj\Debug\net6.0\AWSServerless2.AssemblyInfoInputs.cache
+C:\Users\asgaroff\source\repos\AWSServerless2\obj\Debug\net6.0\AWSServerless2.AssemblyInfo.cs
+C:\Users\asgaroff\source\repos\AWSServerless2\obj\Debug\net6.0\AWSServerless2.csproj.CoreCompileInputs.cache
+C:\Users\asgaroff\source\repos\AWSServerless2\obj\Debug\net6.0\AWSServerless2.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\appsettings.json
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\aws-lambda-tools-defaults.json
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\AWSServerless2.exe
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\AWSServerless2.deps.json
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\AWSServerless2.runtimeconfig.json
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\AWSServerless2.dll
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\AWSServerless2.pdb
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\Amazon.Lambda.APIGatewayEvents.dll
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\Amazon.Lambda.ApplicationLoadBalancerEvents.dll
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\Amazon.Lambda.AspNetCoreServer.dll
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\Amazon.Lambda.Core.dll
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\Amazon.Lambda.Logging.AspNetCore.dll
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\Amazon.Lambda.Serialization.SystemTextJson.dll
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\AWSSDK.Core.dll
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\AWSSDK.DynamoDBv2.dll
+C:\Users\asgaroff\source\repos\AWSServerless2\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\asgaroff\source\repos\AWSServerless2\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\asgaroff\source\repos\AWSServerless2\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\asgaroff\source\repos\AWSServerless2\obj\Debug\net6.0\scopedcss\bundle\AWSServerless2.styles.css
+C:\Users\asgaroff\source\repos\AWSServerless2\obj\Debug\net6.0\AWSServerless2.csproj.CopyComplete
+C:\Users\asgaroff\source\repos\AWSServerless2\obj\Debug\net6.0\AWSServerless2.dll
+C:\Users\asgaroff\source\repos\AWSServerless2\obj\Debug\net6.0\refint\AWSServerless2.dll
+C:\Users\asgaroff\source\repos\AWSServerless2\obj\Debug\net6.0\AWSServerless2.pdb
+C:\Users\asgaroff\source\repos\AWSServerless2\obj\Debug\net6.0\AWSServerless2.genruntimeconfig.cache
+C:\Users\asgaroff\source\repos\AWSServerless2\obj\Debug\net6.0\ref\AWSServerless2.dll
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\obj\Debug\net6.0\AWSServerless2.csproj.AssemblyReference.cache
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\obj\Debug\net6.0\AWSServerless2.GeneratedMSBuildEditorConfig.editorconfig
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\obj\Debug\net6.0\AWSServerless2.AssemblyInfoInputs.cache
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\obj\Debug\net6.0\AWSServerless2.AssemblyInfo.cs
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\obj\Debug\net6.0\AWSServerless2.csproj.CoreCompileInputs.cache
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\obj\Debug\net6.0\AWSServerless2.MvcApplicationPartsAssemblyInfo.cache
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\obj\Debug\net6.0\AWSServerless2.dll
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\obj\Debug\net6.0\refint\AWSServerless2.dll
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\obj\Debug\net6.0\AWSServerless2.pdb
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\appsettings.Development.json
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\appsettings.json
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\aws-lambda-tools-defaults.json
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\AWSServerless2.exe
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\AWSServerless2.deps.json
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\AWSServerless2.runtimeconfig.json
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\AWSServerless2.dll
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\AWSServerless2.pdb
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\Amazon.Lambda.APIGatewayEvents.dll
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\Amazon.Lambda.ApplicationLoadBalancerEvents.dll
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\Amazon.Lambda.AspNetCoreServer.dll
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\Amazon.Lambda.Core.dll
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\Amazon.Lambda.Logging.AspNetCore.dll
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\Amazon.Lambda.Serialization.SystemTextJson.dll
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\AWSSDK.Core.dll
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\AWSSDK.DynamoDBv2.dll
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\Newtonsoft.Json.dll
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\obj\Debug\net6.0\staticwebassets.build.json
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\obj\Debug\net6.0\staticwebassets.development.json
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\obj\Debug\net6.0\scopedcss\bundle\AWSServerless2.styles.css
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\obj\Debug\net6.0\AWSServerless2.csproj.CopyComplete
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\obj\Debug\net6.0\AWSServerless2.genruntimeconfig.cache
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\obj\Debug\net6.0\ref\AWSServerless2.dll
+G:\My Drive\Tapar\Telegram_approach\AWSServerless2\bin\Debug\net6.0\AWSSDK.Extensions.NETCore.Setup.dll

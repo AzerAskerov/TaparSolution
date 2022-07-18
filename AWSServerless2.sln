@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32611.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AWSServerless2", "AWSServerless2.csproj", "{FB3AE6B9-E082-42B1-9601-AB50337FCF06}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{352F7768-37D5-49D8-9E85-0988AFEF6116}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB3AE6B9-E082-42B1-9601-AB50337FCF06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB3AE6B9-E082-42B1-9601-AB50337FCF06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB3AE6B9-E082-42B1-9601-AB50337FCF06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB3AE6B9-E082-42B1-9601-AB50337FCF06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E9AEC817-3839-4A24-9EE7-BF3AC74591AC}
+	EndGlobalSection
+EndGlobal
