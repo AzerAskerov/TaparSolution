@@ -1,4 +1,7 @@
 ﻿
+using TaparSolution.Helpers;
+using TaparSolution.Models;
+
 namespace TaparSolution.Operations
 {
     public abstract class BaseOperation<T> : IDisposable where T : BaseOperationModel
@@ -12,7 +15,9 @@ namespace TaparSolution.Operations
         public virtual void Validate()
         { }
 
-        public virtual void DoFinalize() { }
+        public virtual async void DoFinalize() {
+            await TelegramMessageComposerHelper.SendInfoToAdmin(Result.ToString());
+        }
 
         public  abstract void DoExecute() ;
         public  Task<OperationResult> ExecuteAsync(T param)
@@ -36,6 +41,8 @@ namespace TaparSolution.Operations
                 Result.AddError(ex.Message);
 
             }
+                 finally { DoFinalize(); }  
+                 
             return Result;
 
             });

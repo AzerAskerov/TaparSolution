@@ -12,5 +12,13 @@ namespace TaparSolution.Helpers
                 chat_id = chatid
             };
         }
+
+        public static  Task<SendMessageResponse> SendInfoToAdmin(string text)
+        {
+            return WebClient.SendMessagePostAsync<SendMessageResponse>(
+                JustInformation(WebClient.adminchatid, text),
+                WebClient.SendMessageMehtod,
+                WebClient.Admintoken);
+        }
     }
 }

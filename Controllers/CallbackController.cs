@@ -418,7 +418,7 @@ namespace TaparSolution.Controllers
             }
             #endregion
 
-            #region setting uatopart images
+            #region setting autopart images
             else if (LastMessage.Type == "autopartimage")
             {
                 if (input.message.text != "Yükləməni sonlandır")
@@ -464,7 +464,7 @@ namespace TaparSolution.Controllers
                     composeMessage.request_oid = LastMessage.request_oid;
 
 
-                    #region Partner Inqery Sending
+                    #region Partner Inquery Sending
                     using (DistributeRequestToPartnerOperation op = new())
                     {
                         DistributeRequestToPartnerModel model = new()
