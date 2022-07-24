@@ -62,10 +62,7 @@ namespace TaparSolution.Operations
                 mainMessageContent.reply_markup = null;
                 mainMessageContent.caption += mainMessageContent.text + $"\n " +
                     $"\n *Sorğuya cavab:*" +
-                    $"\n✅ Var. Qiymət:{respondedtext}" +
-                    $"\n \n *Balans:*" +
-                    $"\n *sorğuya istifadə olunan:*_{currentcompotition.price}_" +
-                    $"\n *qalan balans:* _{currentpartner.balance}_";
+                    $"\n✅ Var. Qiymət:{respondedtext}";
 
                  WebClient.SendMessagePostAsync<object>(mainMessageContent, "editMessageCaption", WebClient.Partnerbottoken).Wait();
 

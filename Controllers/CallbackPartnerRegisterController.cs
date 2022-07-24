@@ -1,14 +1,16 @@
-﻿using TaparSolution.Models;
-using TaparSolution.Models.DBTable;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using TaparSolution.Models;
+using TaparSolution.Models.DBTable;
 
 namespace TaparSolution.Controllers
 {
     [Route("api/[controller]")]
     public class CallbackPartnerRegisterController : ControllerBase
     {
-
+        /*
+restart - Qeydiyyatı yenidən başla
+   */
         private readonly IOptions<MyConfig> config;
         public CallbackPartnerRegisterController(IOptions<MyConfig> config)
         {
@@ -40,37 +42,68 @@ namespace TaparSolution.Controllers
                 Partner = partner.FirstOrDefault();
             #endregion
 
+            #region restart registration
+
+            if (input.message?.text=="/restart")
+            {
+                if (Partner is not null)
+                {
+                    if (Partner.status == "unapproved")
+                    {
+                        await db.DeletePartner(Partner);
+                        Partner = null;
+                       
+                    }
+                    else
+                    {
+                        responsemessage = new ComposeMessage()
+                        {
+                            chat_id = input.message.chat.id.ToString(),
+                            text = $" ℹ Qeydiyyatı yenidən başlamaq mümkün olmadı. Qeydiyyat statusunuz buna uyğun deyil",
+
+
+
+                        };
+
+                        goto Endpoint;
+
+                    }
+                }
+            }
+            #endregion
 
             #region Defining begining of Registration
-            if (input.message.text == "/start")
+            if (input.message.text == "/start" || input.message?.text == "/restart")
             {
                 responsemessage = new ComposeMessage()
                 {
                     chat_id = input.message.chat.id.ToString(),
                     text = $" ℹ Zəhmət olmasa satış nöqtəsinin adını qeyd edin",
+                    reply_markup=new ReplyKeyboardRemove()
 
-                
 
                 };
                 if (Partner == null)
                 {
-                    Partner = new() {balance=1000,status ="unapproved",partnerid =userid };
-                 await   db.SaveOrUpdatePartner(Partner);
+                    Partner = new() { balance = 1000, status = "unapproved", partnerid = userid };
+                    await db.SaveOrUpdatePartner(Partner);
                     composeMessage.Text = responsemessage.text;
                     composeMessage.Type = "PartnerName";
                 }
-                else if (Partner.status== "unapproved")
+                else if (Partner.status == "unapproved")
                 {
                     responsemessage.text = $"Qeydiyyat üçün artıq müraciət olunub. Sorğunuz baxışdadır." +
                         $" Nəticə barədə məlumat veriləcək. Sorğu nömrəsi: {Partner.partnerid}";
                     composeMessage.Text = "alreadyregistered";
                     composeMessage.Type = "alreadyregistered";
+                    goto Endpoint;
                 }
                 else if (Partner.status == "Approve")
                 {
                     responsemessage.text = $"Qeydiyyat üçün artıq müraciət olunub. Qeydiyyatınız təsdiqlənib. Partnyor N: {Partner.partnerid}";
                     composeMessage.Text = "alreadyregistered";
                     composeMessage.Type = "alreadyregistered";
+                    goto Endpoint;
                 }
                 else
                 {
@@ -78,8 +111,10 @@ namespace TaparSolution.Controllers
                        $"Sorğu nömrəsi: {Partner.partnerid}";
                     composeMessage.Text = "alreadyregistered";
                     composeMessage.Type = "alreadyregistered";
+
+                    goto Endpoint;
                 }
-                
+
             }
             #endregion
 
@@ -91,30 +126,30 @@ namespace TaparSolution.Controllers
                 {
                     chat_id = input.message.chat.id.ToString(),
                     text = $"Zəhmət olmasa ünvan üçün aşağıdakı düyməni basın",
-                    reply_markup = new Keyboard() 
+                    reply_markup = new Keyboard()
                     {
-                        one_time_keyboard=true,
+                        one_time_keyboard = true,
                         keyboard = new List<List<Inline_keyboard>>()
                         {
                             new List<Inline_keyboard>()
                             {
-                                new Inline_keyboard(){ 
+                                new Inline_keyboard(){
                                     request_location=true,
                                     text="Unvanı avtomatik göndər"
                                 }
                             }
                         }
                     }
-                    
+
 
                 };
-                
+
                 Partner.fullName = input.message.text;
                 await db.SaveOrUpdatePartner(Partner);
 
                 composeMessage.Text = responsemessage.text;
                 composeMessage.Type = "locationRequest";
-               
+
 
             }
             #endregion
@@ -143,7 +178,7 @@ namespace TaparSolution.Controllers
 
                 };
 
-              
+
                 Partner.location = input.message.location;
                 await db.SaveOrUpdatePartner(Partner);
 
@@ -160,11 +195,11 @@ namespace TaparSolution.Controllers
                 responsemessage = new ComposeMessage()
                 {
                     chat_id = input.message.chat.id.ToString(),
-                    text = $"Zəhmət Magazanin on tərəfindən aydin gorunen seklini çəkib göndərin"
+                    text = $"Zəhmət olmasa Magazanin on tərəfindən aydin gorunen seklini çəkib göndərin"
 
                 };
 
-               
+
                 Partner.contactInfo = input.message.contact.phone_number;
                 await db.SaveOrUpdatePartner(Partner);
 
@@ -175,17 +210,68 @@ namespace TaparSolution.Controllers
             }
             #endregion
 
+
+
             #region setting photo
             else if (LastMessage.Type == "PhotoRequest")
             {
-                if (input.message.photo==null)
+                if (input.message.photo == null)
                 {
-                  responsemessage.text="Zəhmət olmasa yuxarıdakı instruksiyaya uyğun məlumat göndərin"  ;
+                    responsemessage.text = "Zəhmət olmasa yuxarıdakı instruksiyaya uyğun məlumat göndərin";
                     goto Endpoint;
                 }
-                 
-                Partner.photo = input.message.photo.OrderByDescending(x=>x.file_size).FirstOrDefault().file_id;
+
+                List<Inline_keyboard> buttons = new List<Inline_keyboard>();
+
+                foreach (var r in db.GetAviableRegion())
+                {
+                    buttons.Add(new Inline_keyboard() { text = r });
+                }
+
+                responsemessage = new ComposeMessage()
+                {
+                    chat_id = input.message.chat.id.ToString(),
+                    text = $"Zəhmət olmasa regionu secin",
+                    reply_markup = new Keyboard()
+                    {
+                        keyboard = new List<List<Inline_keyboard>>()
+                        {
+                           buttons
+                        }
+                    }
+
+                };
+                composeMessage.Text = responsemessage.text;
+                composeMessage.Type = "RegionRequest";
+
+
+
+                Partner.photo = input.message.photo.OrderByDescending(x => x.file_size).FirstOrDefault().file_id;
                 await db.SaveOrUpdatePartner(Partner);
+            }
+
+
+            #endregion
+
+            #region setting region
+           else if(LastMessage.Type == "RegionRequest")
+            {
+
+                composeMessage.Text = responsemessage.text;
+                composeMessage.Type = "EndRegister";
+
+                Partner.region = input.message.text;
+                await db.SaveOrUpdatePartner(Partner);
+
+            }
+            #endregion
+
+
+
+            #region send to admin
+
+            if (composeMessage.Type == "EndRegister")
+            {
 
 
                 ComposeMessage sendtoAdminPhoto = new()
@@ -196,8 +282,8 @@ _Partner ID_: *{Partner.partnerid}*
 _Fullname_: *{Partner.fullName}*,
 _ContactInfo_: +*{Partner.contactInfo}*
 ",
-                   photo = Partner.photo,
-                   
+                    photo = Partner.photo,
+
                 }
                     ;
 
@@ -208,13 +294,13 @@ _ContactInfo_: +*{Partner.contactInfo}*
                     longitude = Partner.location.longitude,
                     reply_markup = new Inline_Keyboard()
                     {
-                       
+
                         inline_keyboard = new List<List<Inline_keyboard>>()
                         {
                             new List<Inline_keyboard>()
                             {
                                 new Inline_keyboard(){
-                                   
+
                                     text="Approve",
                                     callback_data=$"{Partner.partnerid}:Approve"
                                 },
@@ -227,8 +313,8 @@ _ContactInfo_: +*{Partner.contactInfo}*
                         }
                     }
                 };
-              
-                freeimageresponse photolink = await WebClient.GeneratePhotoLinkoutside(Partner.photo);
+
+                freeimageresponse photolink = await WebClient.GeneratePhotoLinkoutside(Partner.photo,WebClient.Partnerregistertoken);
 
                 sendtoAdminPhoto.photo = photolink.image.url;
 
@@ -236,23 +322,26 @@ _ContactInfo_: +*{Partner.contactInfo}*
                 await WebClient.SendMessagePostAsync<SendMessageResponse>(sendtoAdminPhoto, "sendPhoto", WebClient.Admintoken);
                 await WebClient.SendMessagePostAsync<SendMessageResponse>(sendtoAdminLocation, "sendLocation", WebClient.Admintoken);
 
-
-
                 responsemessage = new ComposeMessage()
                 {
                     chat_id = input.message.chat.id.ToString(),
-                    text = $"Qeydiyyat sorğunuz baxılması və təsdiqi üçün nəzərə alındı. Nəticə buraya göndəriləcək."
+                    text = $"Qeydiyyat sorğunuz baxılması və təsdiqi üçün nəzərə alındı. Nəticə buraya göndəriləcək.",
+                    reply_markup = new ReplyKeyboardRemove()
 
                 };
-
-
-
-                composeMessage.Text = responsemessage.text;
-                composeMessage.Type = "PhotoRequest";
-
-
             }
-            #endregion
+                #endregion
+
+
+
+
+
+
+
+              
+
+
+                      
 
             Endpoint:
             var sendresponse = await WebClient.SendMessagePostAsync<SendMessageResponse>(responsemessage, "sendMessage", WebClient. Partnerregistertoken);

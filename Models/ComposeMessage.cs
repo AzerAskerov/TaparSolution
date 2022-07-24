@@ -52,6 +52,11 @@ namespace TaparSolution.Models
 
     }
 
+  public   class ReplyKeyboardRemove
+    {
+        public bool remove_keyboard { get; set; } = true;
+    }
+
     public class Inline_keyboard
     {
         [JsonProperty("text", NullValueHandling = NullValueHandling.Ignore)]

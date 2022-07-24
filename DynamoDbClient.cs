@@ -58,6 +58,11 @@ namespace TaparSolution
             await _context.SaveAsync(partner);
         }
 
+        public async Task DeletePartner(PartnerTable partner)
+        {
+            await _context.DeleteAsync(partner);
+        }
+
         public async Task SaveOrUpdateReqRespCompotition(ReqResCompositionTable compotition)
         {
             await _context.SaveAsync(compotition);
@@ -77,6 +82,10 @@ namespace TaparSolution
             return await _context.LoadAsync<ReqResCompositionTable>(comp_oid);
         }
 
+        public List<string> GetAviableRegion()
+        {
+            return new List<string>() { "Bakı", "Sumqayıt", "Xırdalan" };
+        }
 
         public async Task<List<ReqResCompositionTable>> GetReqRespComotitionByPartnerAndRequest(long reqid, long partnerid)
         {
