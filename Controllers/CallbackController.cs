@@ -63,7 +63,7 @@ namespace TaparSolution.Controllers
             var chatmessages = await db.GetLastMessage(chatid.ToString());
             ComposedMessageTable LastMessage = new() { origin="client"};
             if (chatmessages.Any())
-                LastMessage = chatmessages.Where(x=>x.origin == "client").OrderByDescending(x => x.messageid ).FirstOrDefault();
+                LastMessage = chatmessages.Where(x=>x.origin == "client").OrderByDescending(x => x.messageid).FirstOrDefault();
             #endregion
 
             #region selecting Region
@@ -146,8 +146,8 @@ namespace TaparSolution.Controllers
 
             ComposedMessageTable composeMessage = new ComposedMessageTable()
             {
-
-                chat_id = input.message.chat.id.ToString(),
+                messageoid = UniqueGeneratorHelper.UUDGenerate(),
+                chat_id = input.message?.chat.id.ToString(),
                 origin = "client",
                 messagedate = DateTImeHelper.GetCurrentDate()
 

@@ -50,18 +50,7 @@ public class Startup
                 OperationResult result = new OperationResult();
                 RequestSenderQueueHandler op = new();
                 result =await  op.ExecuteAsync(new());
-
-                  
-                
-
-                ComposeMessage responsemessage = new ComposeMessage()
-                {
-                    text = result.ToString(),
-                    chat_id = "1762884854"
-
-                };
-                await WebClient.SendMessagePostAsync<SendMessageResponse>(responsemessage, "sendMessage");
-
+              
             });
 
             //endpoints.MapGet("/*", async context =>

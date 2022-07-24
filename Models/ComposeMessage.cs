@@ -19,7 +19,7 @@ namespace TaparSolution.Models
         public string parse_mode { get { return "markdown"; } }
         public bool request_location { get; set; }
         public bool request_contact { get; set; }
-
+        public long message_id { get; internal set; }
     }
 
     public class MediaPhoto
@@ -43,10 +43,22 @@ namespace TaparSolution.Models
     {
         public List<List<Inline_keyboard>> inline_keyboard { get; set; }
     }
+    public class ForceReply
+    {
+
+        [JsonProperty("force_reply", NullValueHandling = NullValueHandling.Ignore)]
+        public bool force_reply { get; set; }
+        public string input_field_placeholder { get; set; }
+
+    }
 
     public class Inline_keyboard
     {
+        [JsonProperty("text", NullValueHandling = NullValueHandling.Ignore)]
         public string text { get; set; }
+
+        [JsonProperty("input_field_placeholder", NullValueHandling = NullValueHandling.Ignore)]
+        public string input_field_placeholder { get; set; }
         [JsonProperty("url", NullValueHandling = NullValueHandling.Ignore)]
         public string  url { get; set; }
         [JsonProperty("switch_inline_query_current_chat", NullValueHandling = NullValueHandling.Ignore)]

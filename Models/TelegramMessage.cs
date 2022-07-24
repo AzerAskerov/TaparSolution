@@ -36,6 +36,7 @@ namespace TaparSolution.Models
         public long message_id { get; set; }
         public From from { get; set; }
         public Chat chat { get; set; }
+        public Message reply_to_message { get; set; }
         public long date { get; set; }
         public string text { get; set; }
         public List<Entity> entities { get; set; }
@@ -43,6 +44,7 @@ namespace TaparSolution.Models
         public Video video { get; set; }
         public TelegramLocation location { get; set; }
         public TelegramContact contact { get; set; }
+        public string caption { get; set; }
 
         public class Video
         {
@@ -79,6 +81,7 @@ namespace TaparSolution.Models
         public From from { get; set; }
         public Chat chat { get; set; }
         public string  data { get; set; }
+       
     }
 
     public class Inline_query

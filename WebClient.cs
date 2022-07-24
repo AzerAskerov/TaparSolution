@@ -12,6 +12,8 @@ namespace TaparSolution
         public const string Admintoken = "5148883933:AAGhrEGQ7DhrY8sW_-8b2SGmII8vLEjA1oc";
         public const string adminchatid = "1762884854";
         public const string SendMessageMehtod = "sendMessage";
+        public const string SendPhotoMehtod = "sendPhoto";
+
 
         public static async Task<T> SendMessagePostAsync<T>(object requestObject, string methodName, string destination = Clientbottoken)
         {
@@ -28,8 +30,8 @@ namespace TaparSolution
 
         public static async Task<freeimageresponse> GeneratePhotoLinkoutside(string telegramfileid, string destination = Clientbottoken)
         {
-            TelegramFileResult photofile = await WebClient.SendMessagePostAsync<TelegramFileResult>((new { file_id = telegramfileid }), "getFile", WebClient.Clientbottoken);
-            string telegramphotopath = $"https://api.telegram.org/file/bot{WebClient.Clientbottoken}/{photofile.result.file_path}";
+            TelegramFileResult photofile = await WebClient.SendMessagePostAsync<TelegramFileResult>((new { file_id = telegramfileid }), "getFile", destination);
+            string telegramphotopath = $"https://api.telegram.org/file/bot{destination}/{photofile.result.file_path}";
 
           
             using (var client = new HttpClient())

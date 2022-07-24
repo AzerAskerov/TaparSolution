@@ -16,6 +16,7 @@ namespace TaparSolution.Operations
         { }
 
         public virtual async void DoFinalize() {
+            if (!Result.IsSuccess)
             await TelegramMessageComposerHelper.SendInfoToAdmin(Result.ToString());
         }
 

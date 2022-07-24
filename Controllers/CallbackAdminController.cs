@@ -2,6 +2,7 @@
 using TaparSolution.Models.DBTable;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using TaparSolution.Helpers;
 
 namespace TaparSolution.Controllers
 {
@@ -26,7 +27,7 @@ namespace TaparSolution.Controllers
             long partnerid = long.Parse(input.callback_query.data.Split(':')[0]);
             string action = input.callback_query.data.Split(':')[1];
 
-            ComposedMessageTable composeMessage = new() { origin = "admin",chat_id=chatid.ToString() };
+            ComposedMessageTable composeMessage = new() {messageoid= UniqueGeneratorHelper.UUDGenerate(), origin = "admin",chat_id=chatid.ToString() };
 
 
             #region GetLastMessage

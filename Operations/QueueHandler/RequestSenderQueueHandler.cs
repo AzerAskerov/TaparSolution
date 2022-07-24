@@ -9,62 +9,43 @@ namespace TaparSolution.Operations.QueueHandler
     public class RequestSenderQueueHandler : BaseOperation<RequestSenderQueueHandlerModel>
     {
         List<QueueTable> queues = new();
-        IAmazonDynamoDB amazondb;
 
-        DynamoDbClient db = DynamoDbClient.GetInstance();
+
+
 
         public override void Validate()
         {
             base.Validate();
 
-            Result.AddInformation("validation started");
-            queues = db.GetUnproccededQueue().Result;
+#if DEBUG
+            queues = Parameter._db.GetQueueById(637942014776701972).Result;
+#else
+   queues = Parameter._db.GetUnproccededQueue().Result;
+#endif
+
+
+
+
         }
 
-        public override void DoFinalize()
-        {
-            base.DoFinalize();
-            Result.AddInformation("finalize");
-        }
-        public override  void DoExecute()
+        public override void DoExecute()
         {
 
-            Result.AddInformation($"after queue call");
-
-         
             foreach (var _q in queues)
             {
-                Result.AddInformation("inside queue");
-                var currentcompotition = db.GetReqRespCompotitionByOid(_q.identifier).Result;
-                var currentrequest =  db.GetRequestByOid(currentcompotition.requestid).Result;
-                var currentpartner = db.GetPartnerByUserId(currentcompotition.partnerid).Result.FirstOrDefault();
-                Result.AddInformation("got request");
+                // collect required
+
+                var currentcompotition = Parameter._db.GetReqRespCompotitionByOid(_q.identifier).Result;
+                var currentrequest = Parameter._db.GetRequestByOid(currentcompotition.requestid).Result;
+                var currentpartner = Parameter._db.GetPartnerByUserId(currentcompotition.partnerid).Result.FirstOrDefault();
+
                 //  //bundling request for partners
-                string info = $"*Ehtiyyat Hissəsinin məlumatlari*: \n" +
-                    $"*Hissə:* _{currentrequest.auto_part}_\n" +
-                    $"*Marka:* _{currentrequest.selected_brand}_\n" +
-                    $"*Sorğu N:* _{currentrequest.requestid}_";
 
-
-                //texpass message compose
-                ComposeMessage Texpassport = new ComposeMessage();
-                Texpassport.caption = info;
-                freeimageresponse techpassportfilelinkresult =  WebClient.GeneratePhotoLinkoutside(currentrequest.tech_document_img).Result;
-                Texpassport.photo = techpassportfilelinkresult.image.url;
-
-                // TExpass end
-
-
-                // partnerbundle.chat_id =
-                Texpassport.chat_id = currentcompotition.partnerid.ToString();
-
-                //TODO add buttons: Var, yoxdur, sikayet et, soz sorus
-                //
-
-
+                ComposeMessage Texpassport= TelegramMessageComposerHelper.PartnerInqueryMessage(currentrequest, currentcompotition, currentpartner);
               
+
                 //send bundled reuqest message
-                SendMessageResponse response=  WebClient.SendMessagePostAsync<SendMessageResponse>(Texpassport, "sendPhoto", WebClient.Partnerbottoken).Result;
+                SendMessageResponse response = WebClient.SendMessagePostAsync<SendMessageResponse>(Texpassport, "sendPhoto", WebClient.Partnerbottoken).Result;
                 if (response.ok)
                 {
                     _q.status = queuestatus.success;
@@ -73,17 +54,32 @@ namespace TaparSolution.Operations.QueueHandler
                     //TODO Deduct Partner Balance
                     currentpartner.balance -= currentcompotition.price;
                     Parameter._db.SaveOrUpdatePartner(currentpartner).Wait();
+                    currentcompotition.partnerMessageid = response.result.message_id;
+
+                    Parameter._db.SaveOrUpdateMessage(new ComposedMessageTable()
+                    {
+                        chat_id = Texpassport.chat_id,
+                        messagedate = DateTImeHelper.GetCurrentDate(),
+                        messageid = response.result.message_id,
+                        messageoid = UniqueGeneratorHelper.UUDGenerate(),
+                        origin = "Partner",
+                        request_oid = currentrequest.requestid,
+                        Type = "QueryToPartnerSent",
+                        Text = $"{currentrequest.requestid} was send to partner {currentpartner.partnerid}"
+                    }).Wait();
+
                 }
                 else
                     Result.AddInformation($"send response error: {response.result.text}");
             }
         }
+       
     }
 
 
-    public class RequestSenderQueueHandlerModel:BaseOperationModel
+    public class RequestSenderQueueHandlerModel : BaseOperationModel
     {
-       
+
     }
 
 }

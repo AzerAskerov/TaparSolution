@@ -77,6 +77,30 @@ namespace TaparSolution
             return await _context.LoadAsync<ReqResCompositionTable>(comp_oid);
         }
 
+
+        public async Task<List<ReqResCompositionTable>> GetReqRespComotitionByPartnerAndRequest(long reqid, long partnerid)
+        {
+            var search = _context.ScanAsync<ReqResCompositionTable>
+   (
+     new[] {
+        new ScanCondition
+          (
+            nameof(ReqResCompositionTable.requestid),
+            ScanOperator.Equal,
+            reqid
+          ),
+         new ScanCondition
+          (
+            nameof(ReqResCompositionTable.partnerid),
+            ScanOperator.Equal,
+            partnerid
+          )
+     }
+   );
+
+            return await search.GetRemainingAsync();
+
+        }
         public async Task<List<Brandtable>> GetBrandList( string searchString)
         {
             var search = _context.ScanAsync<Brandtable>
@@ -91,10 +115,7 @@ namespace TaparSolution
      }
    );
 
-           
-
             return await search.GetRemainingAsync();
-
 
         }
 
@@ -109,6 +130,31 @@ namespace TaparSolution
             ScanOperator.Equal,
             chatid
           )
+     }
+   );
+
+            return await search.GetRemainingAsync();
+
+
+        }
+
+        public async Task<List<ComposedMessageTable>> GetAllPartnerMessageByCurrentRequest(long reqid)
+        {
+            var search = _context.ScanAsync<ComposedMessageTable>
+   (
+     new[] {
+        new ScanCondition
+          (
+            nameof(ComposedMessageTable.request_oid),
+            ScanOperator.Equal,
+            reqid
+          ),
+        new ScanCondition
+        (
+            nameof(ComposedMessageTable.origin),
+            ScanOperator.Equal,
+            "Partner"
+            )
      }
    );
 
@@ -159,6 +205,28 @@ namespace TaparSolution
         (nameof(PartnerTable.balance),
         ScanOperator.GreaterThan,
         0)
+     }
+   );
+
+            return await search.GetRemainingAsync();
+
+
+        }
+
+        public async Task<List<QueueTable>> GetQueueById(long id)
+        {
+
+
+            var search = _context.ScanAsync<QueueTable>
+   (
+     new[] {
+        new ScanCondition
+          (
+            nameof(QueueTable.queueid),
+            ScanOperator.Equal,
+            id
+          )
+
      }
    );
 

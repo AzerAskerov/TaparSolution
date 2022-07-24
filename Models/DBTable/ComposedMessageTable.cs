@@ -6,11 +6,12 @@ namespace TaparSolution.Models.DBTable
     public class ComposedMessageTable
     {
         [DynamoDBHashKey]
-        public int messageid
+        public long messageoid
         {
             get;
             set;
         }
+        public long messageid { get; set; }
         public string Text { get; set; }
         public string Type { get; set; }
         public string  chat_id { get; set; }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Text;
+using TaparSolution.Operations;
 
 namespace TaparSolution.Controllers
 {
@@ -22,7 +23,7 @@ namespace TaparSolution.Controllers
  register - partnyor olmaq üçün qeydiyyat
  profile - istifadəçi məlumatları
  pricelist - mövcud qiymətlər
-    */ 
+    */
 
     [Route("api/[controller]")]
     public class CallbackPartnerController : ControllerBase
@@ -45,10 +46,18 @@ namespace TaparSolution.Controllers
             {
                 chat_id= chatid.ToString()
             };
+            ComposedMessageTable composeMessage = new()
+            {
+                messageoid = UniqueGeneratorHelper.UUDGenerate(),
+                messagedate = DateTImeHelper.GetCurrentDate(),
+                origin = "Partner",
+                chat_id = chatid.ToString(),
+
+            };
 
             #region GetLastMessage
-           
-            var chatmessages = await db.GetLastMessage(chatid.ToString());
+
+          var chatmessages = await db.GetLastMessage(chatid.ToString());
             ComposedMessageTable LastMessage = null;
             if (chatmessages.Any())
                 LastMessage = chatmessages.OrderByDescending(x => x.messageid).FirstOrDefault();
@@ -72,32 +81,66 @@ new Inline_keyboard()
                       }
                     }
                 };
+                composeMessage.Type = "PartnerRegistercommand";                 
+            
 
             }
             #endregion
 
-            ComposedMessageTable composeMessage = new ComposedMessageTable()
+
+
+            #region initial action button clicked
+            if (input.callback_query is not null)
             {
+                switch (input.callback_query.data)
+                {
+                    case "exist":
+                    case "notexist":
+                    case "question":
+                        using (ResponsePartnerToInqueryOperation op = new () )
+                        {
+                            await op.ExecuteAsync(new ResponsePartnerToInquery()
+                            {
+                                incoming = input
+                            });
+                            responsemessage = op.message;
+                            composeMessage.request_oid = long.Parse( op.requestNumber);
+                        }
 
-                chat_id = input.message.chat.id.ToString(),
-               origin="Partner",
-               Type="PartnerRegistercommand",
-               messagedate = DateTImeHelper.GetCurrentDate()
+                        composeMessage.Type = "PartnerActionToRequest";
+                        break;
+                    default:
+                        break;
+                }
+            }
+            #endregion
+
+            #region inline response text to request message replied
+            if (input.message?.reply_to_message is not null)
+            {
+                using (ActionInlineInputGotOperation op = new())
+                {
+                    await op.ExecuteAsync(new ActionInlineInputGotModel()
+                    {
+                        incoming = input
+                    });
+                    responsemessage = op.message;
+                }
+
+                composeMessage.Type = "PartnerInlineAnswerGot";
+            }
+            #endregion
 
 
-            };
 
-       
+            if(responsemessage.chat_id is not null)
+            {
+                var sendresponse = await WebClient.SendMessagePostAsync<SendMessageResponse>(responsemessage, "sendMessage", WebClient.Partnerbottoken);
+                composeMessage.messageid = composeMessage.messageid == 0 ? sendresponse.result.message_id : composeMessage.messageid;
+                await db.SaveOrUpdateMessage(composeMessage);
+            }
 
-
-
-
-          
-
-            var sendresponse = await WebClient.SendMessagePostAsync<SendMessageResponse>(responsemessage, "sendMessage",WebClient.Partnerbottoken);
-
-            composeMessage.messageid = composeMessage.messageid==0?sendresponse.result.message_id: composeMessage.messageid;
-            await db.SaveOrUpdateMessage(composeMessage);
+           
             return "OK";
 
 

@@ -46,6 +46,7 @@ namespace TaparSolution.Operations
                         partnerid = p.partnerid,
                         price = price,
                         requestid = currentrequest.requestid,
+                        clientChatId =long.Parse( Parameter._lastMessage.chat_id)
                     };
 
                   await  Parameter._db.SaveOrUpdateReqRespCompotition(compotition);

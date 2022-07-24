@@ -15,7 +15,7 @@ namespace TaparSolution.Models.DBTable
         public TelegramLocation location { get; set; }
         public string address { get; set; }
         public string  contactInfo { get; set; }
-        public long balance { get; set; }
+        public int balance { get; set; }
         public List<string> subscribedBrands { get; set; }
         public string region { get; set; }
         public string status { get; set; }
