@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using TaparSolution.Helpers;
 using TaparSolution.Models;
 using TaparSolution.Models.DBTable;
 
@@ -23,7 +24,7 @@ restart - Qeydiyyatı yenidən başla
            
             long chatid = (input.message ?? input.callback_query.message).chat.id;
             long userid = (input.message ?? input.callback_query.message).from.id;
-            ComposedMessageTable composeMessage = new() { origin = "partnerregister",chat_id=chatid.ToString() };
+            ComposedMessageTable composeMessage = new() {messageoid = UniqueGeneratorHelper.UUDGenerate(),messagedate=DateTImeHelper.GetCurrentDate(), origin = "partnerregister",chat_id=chatid.ToString() };
             ComposeMessage responsemessage = new() { chat_id=chatid.ToString()};
 
             #region GetLastMessage
@@ -78,14 +79,15 @@ restart - Qeydiyyatı yenidən başla
                 responsemessage = new ComposeMessage()
                 {
                     chat_id = input.message.chat.id.ToString(),
-                    text = $" ℹ Zəhmət olmasa satış nöqtəsinin adını qeyd edin",
+                    text = $" ℹ Zəhmət olmasa satış nöqtəsinin adını qeyd edin" +
+                    $"\n*Nümunə:* _Best sale mağazası Xətai_",
                     reply_markup=new ReplyKeyboardRemove()
 
 
                 };
                 if (Partner == null)
                 {
-                    Partner = new() { balance = 1000, status = "unapproved", partnerid = userid };
+                    Partner = new() { balance = 1000, status = "unapproved", partnerid = userid, createdDate=DateTImeHelper.GetCurrentDate() };
                     await db.SaveOrUpdatePartner(Partner);
                     composeMessage.Text = responsemessage.text;
                     composeMessage.Type = "PartnerName";
@@ -93,15 +95,16 @@ restart - Qeydiyyatı yenidən başla
                 else if (Partner.status == "unapproved")
                 {
                     responsemessage.text = $"Qeydiyyat üçün artıq müraciət olunub. Sorğunuz baxışdadır." +
-                        $" Nəticə barədə məlumat veriləcək. Sorğu nömrəsi: {Partner.partnerid}";
-                    composeMessage.Text = "alreadyregistered";
+                        @$" Nəticə barədə məlumat veriləcək. Sorğu nömrəsi: *{Partner.partnerid}*." +
+                        $"\n Yaxud Menu-dan _restart_ seçərək qeydiyyatı yenidən başlada bilərsiniz.";
+                    composeMessage.Text = responsemessage.text;
                     composeMessage.Type = "alreadyregistered";
                     goto Endpoint;
                 }
                 else if (Partner.status == "Approve")
                 {
                     responsemessage.text = $"Qeydiyyat üçün artıq müraciət olunub. Qeydiyyatınız təsdiqlənib. Partnyor N: {Partner.partnerid}";
-                    composeMessage.Text = "alreadyregistered";
+                    composeMessage.Text = responsemessage.text;
                     composeMessage.Type = "alreadyregistered";
                     goto Endpoint;
                 }
@@ -109,7 +112,7 @@ restart - Qeydiyyatı yenidən başla
                 {
                     responsemessage.text = $"Qeydiyyat üçün artıq müraciət olunub. Sorğunuz təsdiq olunmayıb." +
                        $"Sorğu nömrəsi: {Partner.partnerid}";
-                    composeMessage.Text = "alreadyregistered";
+                    composeMessage.Text = responsemessage.text;
                     composeMessage.Type = "alreadyregistered";
 
                     goto Endpoint;
@@ -125,7 +128,8 @@ restart - Qeydiyyatı yenidən başla
                 responsemessage = new ComposeMessage()
                 {
                     chat_id = input.message.chat.id.ToString(),
-                    text = $"Zəhmət olmasa ünvan üçün aşağıdakı düyməni basın",
+                    text = $"ℹ Zəhmət olmasa ünvan üçün aşağıdakı *Ünvanı avtomatik göndər* düyməni basın.Nəzərə alın ki, müştərilər " +
+                    $"indi qeyd olunan ünvana yönləndiriləcəklər. O baxımdan qeydiyyatı satış olunacaq məkanda aparın.",
                     reply_markup = new Keyboard()
                     {
                         one_time_keyboard = true,
@@ -135,7 +139,7 @@ restart - Qeydiyyatı yenidən başla
                             {
                                 new Inline_keyboard(){
                                     request_location=true,
-                                    text="Unvanı avtomatik göndər"
+                                    text="Ünvanı avtomatik göndər"
                                 }
                             }
                         }
@@ -160,7 +164,7 @@ restart - Qeydiyyatı yenidən başla
                 responsemessage = new ComposeMessage()
                 {
                     chat_id = input.message.chat.id.ToString(),
-                    text = $"Zəhmət olmasa əlaqə üçün aşağıdakı düyməni basın",
+                    text = $"ℹ Zəhmət olmasa əlaqə üçün aşağıdakı düyməni basın",
                     reply_markup = new Keyboard()
                     {
                         one_time_keyboard = true,
@@ -195,7 +199,7 @@ restart - Qeydiyyatı yenidən başla
                 responsemessage = new ComposeMessage()
                 {
                     chat_id = input.message.chat.id.ToString(),
-                    text = $"Zəhmət olmasa Magazanin on tərəfindən aydin gorunen seklini çəkib göndərin"
+                    text = $"ℹ Zəhmət olmasa Magazanin on tərəfindən aydin gorunen seklini çəkib göndərin"
 
                 };
 
@@ -217,7 +221,7 @@ restart - Qeydiyyatı yenidən başla
             {
                 if (input.message.photo == null)
                 {
-                    responsemessage.text = "Zəhmət olmasa yuxarıdakı instruksiyaya uyğun məlumat göndərin";
+                    responsemessage.text = "ℹ Zəhmət olmasa yuxarıdakı instruksiyaya uyğun məlumat göndərin";
                     goto Endpoint;
                 }
 
@@ -260,7 +264,7 @@ restart - Qeydiyyatı yenidən başla
                 composeMessage.Text = responsemessage.text;
                 composeMessage.Type = "EndRegister";
 
-                Partner.region = input.message.text;
+                Partner.region = input.message.text?.ToUpper();
                 await db.SaveOrUpdatePartner(Partner);
 
             }
@@ -280,7 +284,8 @@ restart - Qeydiyyatı yenidən başla
                     caption = $@"
 _Partner ID_: *{Partner.partnerid}*
 _Fullname_: *{Partner.fullName}*,
-_ContactInfo_: +*{Partner.contactInfo}*
+_ContactInfo_: *{Partner.contactInfo}*,
+_Region_: *{Partner.region}*
 ",
                     photo = Partner.photo,
 
@@ -347,6 +352,7 @@ _ContactInfo_: +*{Partner.contactInfo}*
             var sendresponse = await WebClient.SendMessagePostAsync<SendMessageResponse>(responsemessage, "sendMessage", WebClient. Partnerregistertoken);
 
             composeMessage.messageid = composeMessage.messageid == 0 ? sendresponse.result.message_id : composeMessage.messageid;
+            composeMessage.Text = responsemessage?.text;
             await db.SaveOrUpdateMessage(composeMessage);
             return "ok";
 

@@ -21,6 +21,7 @@ namespace TaparSolution.Models.DBTable
         public string status { get; set; }
         public string photo { get; set; }
         public int rate { get; set; }
+        public DateTime createdDate { get; set; }
 
     }
 }

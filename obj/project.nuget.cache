@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "jOJT6nF4TChfYPnPCOpxV5nEnRoD/ixpX18d4UVTizmSH5+9TSxhyj9JhaJnH2/7Ow8gu01CFIVk0TNoKc0KFg==",
+  "dgSpecHash": "P+lGQVkze93wxHAOCFNEAEutEMImD5CxmC+AJRfKRlYkzVjFB0Eacoj5Xfw9HqjAdN99PQp5uzUBZMeh7/9aeg==",
   "success": true,
   "projectFilePath": "C:\\Users\\asgaroff\\source\\repos\\TaparSolution\\TaparSolution.csproj",
   "expectedPackageFiles": [
@@ -24,13 +24,11 @@
     "C:\\Users\\asgaroff\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\asgaroff\\.nuget\\packages\\system.memory\\4.5.0\\system.memory.4.5.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime.compilerservices.unsafe\\4.5.0\\system.runtime.compilerservices.unsafe.4.5.0.nupkg.sha512",
-    "C:\\Users\\asgaroff\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.4\\microsoft.netcore.app.ref.6.0.4.nupkg.sha512",
-    "C:\\Users\\asgaroff\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-x64\\6.0.4\\microsoft.netcore.app.runtime.linux-x64.6.0.4.nupkg.sha512",
-    "C:\\Users\\asgaroff\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.4\\microsoft.windowsdesktop.app.ref.6.0.4.nupkg.sha512",
+    "C:\\Users\\asgaroff\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.4\\microsoft.netcore.app.host.win-x64.6.0.4.nupkg.sha512",
     "C:\\Users\\asgaroff\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.4\\microsoft.aspnetcore.app.ref.6.0.4.nupkg.sha512",
-    "C:\\Users\\asgaroff\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-x64\\6.0.4\\microsoft.aspnetcore.app.runtime.linux-x64.6.0.4.nupkg.sha512",
-    "C:\\Users\\asgaroff\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\6.0.4\\microsoft.netcore.app.crossgen2.win-x64.6.0.4.nupkg.sha512",
-    "C:\\Users\\asgaroff\\.nuget\\packages\\microsoft.netcore.app.host.linux-x64\\6.0.4\\microsoft.netcore.app.host.linux-x64.6.0.4.nupkg.sha512"
+    "C:\\Users\\asgaroff\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.4\\microsoft.windowsdesktop.app.ref.6.0.4.nupkg.sha512",
+    "C:\\Users\\asgaroff\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.4\\microsoft.netcore.app.ref.6.0.4.nupkg.sha512",
+    "C:\\Users\\asgaroff\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\6.0.4\\microsoft.netcore.app.crossgen2.win-x64.6.0.4.nupkg.sha512"
   ],
   "logs": []
 }
