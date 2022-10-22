@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using TaparSolution.Helpers;
 using TaparSolution.Models;
 using TaparSolution.Models.DBTable;
+using TaparSolution.Operations;
 
 namespace TaparSolution.Controllers
 {
@@ -257,8 +258,29 @@ restart - Qeydiyyatı yenidən başla
 
             #endregion
 
+            #region selecting Brands
+
+            else if(LastMessage.Type == "RegionRequest")
+            {
+                using (PartnerRegisterBrandSettingOp op = new())
+                {
+                    await op.ExecuteAsync(new PartnerRegisterBrandSettingModel()
+                    {
+                        incomingMessage = input,
+                        Partner = Partner,
+                        _lastMessage = LastMessage,
+
+                    });
+                    responsemessage = op.message;
+                }
+
+            }
+
+            #endregion
+
+
             #region setting region
-           else if(LastMessage.Type == "RegionRequest")
+            else if (LastMessage.Type == "RegionRequest" || LastMessage.Type == "BrandSelecting")
             {
 
                 composeMessage.Text = responsemessage.text;

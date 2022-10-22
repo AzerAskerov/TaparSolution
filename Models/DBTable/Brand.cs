@@ -9,7 +9,7 @@ namespace TaparSolution.Models.DBTable
         public string Brand { get; set; }
         public string src { get; set; }
 
-        public List<Brandtable> Fulllist()
+        public static List<Brandtable> Fulllist()
         {
             return new List<Brandtable>()
             {

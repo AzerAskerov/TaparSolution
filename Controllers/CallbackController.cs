@@ -29,7 +29,7 @@ namespace TaparSolution.Controllers
             #region GetBrandList
             if (input.inline_query != null)
             {
-                var brandlist = new Brandtable(); //await db.GetBrandList(input.inline_query.query);
+            
                 string[] queryparams = input.inline_query.query.ToUpper().Split(' ');
                 AnswerInlineQuery answer = new AnswerInlineQuery()
                 {
@@ -37,7 +37,7 @@ namespace TaparSolution.Controllers
                     results = new List<InlineArticleAnswer>()
 
                 };
-                foreach (var b in brandlist.Fulllist().Where(x => x.Brand.ToUpper().Contains(queryparams[0])))
+                foreach (var b in Brandtable.Fulllist().Where(x => x.Brand.ToUpper().Contains(queryparams[0])))
                 {
                     answer.results.Add(new InlineArticleAnswer()
                     {
