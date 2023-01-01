@@ -3,6 +3,7 @@ using TaparSolution.Models;
 using TaparSolution.Operations;
 using TaparSolution.Operations.QueueHandler;
 using Microsoft.Extensions.Options;
+using TaparSolution.Helpers;
 
 namespace TaparSolution;
 
@@ -44,13 +45,13 @@ public class Startup
         {
             endpoints.MapControllers();
 
-            endpoints.MapPost("/*", async context =>
+            endpoints.MapPost("/queryrun", async context =>
             {
-
+                // await TelegramMessageComposerHelper.SendInfoToAdmin("gelir");
                 OperationResult result = new OperationResult();
                 RequestSenderQueueHandler op = new();
-                result =await  op.ExecuteAsync(new());
-              
+                result = op.ExecuteAsync(new()).Result;
+
             });
 
             //endpoints.MapGet("/*", async context =>

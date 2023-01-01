@@ -7,7 +7,8 @@ namespace TaparSolution.Operations
     public abstract class BaseOperation<T> : IDisposable where T : BaseOperationModel
     {
         public T Parameter { get; set; }
-      public  OperationResult Result = new OperationResult();
+      
+        public  OperationResult Result = new OperationResult();
         public BaseOperation()
         {
            
@@ -71,6 +72,7 @@ namespace TaparSolution.Operations
             return String.Join(';', Issues.Select(x=>x.Message));
         }
         public List<Issue> Issues = new List<Issue>();
+        public string selectedError { get; set; }
 
         public bool IsSuccess
         {
@@ -84,6 +86,7 @@ namespace TaparSolution.Operations
         public void AddError(string _message)
         {
             this.Issues.Add(new Issue() { Severity = SeverityEnum.Error, Message = _message });
+            this.selectedError = _message;
         }
 
         public void AddInformation(string _message)

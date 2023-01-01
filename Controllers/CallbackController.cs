@@ -30,7 +30,9 @@ namespace TaparSolution.Controllers
             if (input.inline_query != null)
             {
             
-                string[] queryparams = input.inline_query.query.ToUpper().Split(' ');
+                string[] queryparams 
+                    
+                    = input.inline_query.query.ToUpper().Split(' ');
                 AnswerInlineQuery answer = new AnswerInlineQuery()
                 {
                     inline_query_id = input.inline_query.id,

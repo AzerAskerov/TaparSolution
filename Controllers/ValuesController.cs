@@ -9,8 +9,8 @@ public class ValuesController : ControllerBase
    
 
     // GET api/values/5
-    [HttpGet("{id}")]
-    public string Get(int id)
+    [HttpGet("{pin}")]
+    public string Get(string pin)
     {
         return "value";
     }

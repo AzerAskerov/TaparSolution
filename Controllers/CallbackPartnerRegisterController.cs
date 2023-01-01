@@ -75,7 +75,7 @@ restart - Qeydiyyatı yenidən başla
             #endregion
 
             #region Defining begining of Registration
-            if (input.message.text == "/start" || input.message?.text == "/restart")
+            if (input.message?.text == "/start" || input.message?.text == "/restart")
             {
                 responsemessage = new ComposeMessage()
                 {
@@ -241,8 +241,9 @@ restart - Qeydiyyatı yenidən başla
                     {
                         keyboard = new List<List<Inline_keyboard>>()
                         {
-                           buttons
+                            buttons
                         }
+                        , one_time_keyboard = true
                     }
 
                 };
@@ -258,9 +259,32 @@ restart - Qeydiyyatı yenidən başla
 
             #endregion
 
-            #region selecting Brands
+            #region setting region and start selecting Brands
 
             else if(LastMessage.Type == "RegionRequest")
+            {
+                using (PartnerRegisterSetRegionAndAskBrandSelecting op = new())
+                {
+                    await op.ExecuteAsync(new PartnerRegisterSetRegionAndAskBrandSelectingModel()
+                    {
+                        incomingMessage = input,
+                        Partner = Partner,
+                        _lastMessage = LastMessage,
+                        OutputComposedMessage = composeMessage
+
+                    });
+                    responsemessage = op.message;
+                    composeMessage = op.Parameter.OutputComposedMessage;
+                   
+                }
+
+            }
+
+            #endregion
+
+
+            #region setting brands and end flow
+            else if (LastMessage.Type == "StartBrandSelection")
             {
                 using (PartnerRegisterBrandSettingOp op = new())
                 {
@@ -269,25 +293,12 @@ restart - Qeydiyyatı yenidən başla
                         incomingMessage = input,
                         Partner = Partner,
                         _lastMessage = LastMessage,
+                        OutputComposedMessage = composeMessage
 
                     });
                     responsemessage = op.message;
+                    composeMessage = op.Parameter.OutputComposedMessage;
                 }
-
-            }
-
-            #endregion
-
-
-            #region setting region
-            else if (LastMessage.Type == "RegionRequest" || LastMessage.Type == "BrandSelecting")
-            {
-
-                composeMessage.Text = responsemessage.text;
-                composeMessage.Type = "EndRegister";
-
-                Partner.region = input.message.text?.ToUpper();
-                await db.SaveOrUpdatePartner(Partner);
 
             }
             #endregion
@@ -296,7 +307,7 @@ restart - Qeydiyyatı yenidən başla
 
             #region send to admin
 
-            if (composeMessage.Type == "EndRegister")
+            if (composeMessage.Type == "endbrandselection")
             {
 
 
@@ -308,6 +319,7 @@ _Partner ID_: *{Partner.partnerid}*
 _Fullname_: *{Partner.fullName}*,
 _ContactInfo_: *{Partner.contactInfo}*,
 _Region_: *{Partner.region}*
+_Brands_:*{String.Join(';',Partner.subscribedBrands)}*
 ",
                     photo = Partner.photo,
 
@@ -351,7 +363,7 @@ _Region_: *{Partner.region}*
 
                 responsemessage = new ComposeMessage()
                 {
-                    chat_id = input.message.chat.id.ToString(),
+                    chat_id = input.callback_query.message.chat.id.ToString(),
                     text = $"Qeydiyyat sorğunuz baxılması və təsdiqi üçün nəzərə alındı. Nəticə buraya göndəriləcək.",
                     reply_markup = new ReplyKeyboardRemove()
 
@@ -371,7 +383,7 @@ _Region_: *{Partner.region}*
                       
 
             Endpoint:
-            var sendresponse = await WebClient.SendMessagePostAsync<SendMessageResponse>(responsemessage, "sendMessage", WebClient. Partnerregistertoken);
+            var sendresponse = WebClient.SendMessagePostAsync<SendMessageResponse>(responsemessage, "sendMessage", WebClient. Partnerregistertoken).Result;
 
             composeMessage.messageid = composeMessage.messageid == 0 ? sendresponse.result.message_id : composeMessage.messageid;
             composeMessage.Text = responsemessage?.text;

@@ -194,7 +194,7 @@ namespace TaparSolution
         public async Task<List<PartnerTable>> GetPartnerByBrandAndRegionSubscription(string brand, List<string> regions)
         {
 
-            var objectValues = regions.Select(x => (object)x.ToUpper()).ToArray();
+            var objectValues = regions.Select(x => (object)x).ToArray();
             var search = _context.ScanAsync<PartnerTable>
    (
      new[] {
