@@ -70,7 +70,9 @@ namespace TaparSolution.Operations.QueueHandler
 
                 }
                 else
-                    Result.AddInformation($"send response error: {response.result.text}");
+                    Result.AddError($"send response error: {response.description};\n" +
+                        $" Partner_id:{currentpartner.partnerid} \n" +
+                        $"Request_id:{currentrequest.requestid}");
             }
         }
        

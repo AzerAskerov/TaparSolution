@@ -147,7 +147,7 @@ namespace TaparSolution
 
         }
 
-        public async Task<List<ComposedMessageTable>> GetAllPartnerMessageByCurrentRequest(long reqid)
+        public async Task<List<ComposedMessageTable>> GetAllPartnerMessageByCurrentRequest(long reqid, string chat_id)
         {
             var search = _context.ScanAsync<ComposedMessageTable>
    (
@@ -157,6 +157,12 @@ namespace TaparSolution
             nameof(ComposedMessageTable.request_oid),
             ScanOperator.Equal,
             reqid
+          ),
+           new ScanCondition
+          (
+            nameof(ComposedMessageTable.chat_id),
+            ScanOperator.Equal,
+            chat_id
           ),
         new ScanCondition
         (

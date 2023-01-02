@@ -16,6 +16,7 @@
     {
         public bool ok { get; set; }
         public Result result { get; set; }
+        public string description { get; set; }
     }
 
 

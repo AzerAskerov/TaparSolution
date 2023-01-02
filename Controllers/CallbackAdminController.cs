@@ -50,6 +50,7 @@ namespace TaparSolution.Controllers
             {
                 case "Approve":
                     Partner.status = action;
+                    Partner.rate = 1;
                     await db.SaveOrUpdatePartner(Partner);
                     composeMessage.messageid =(int)messageid;
                     composeMessage.Text = $"Partner {Partner.fullName} has been approved";

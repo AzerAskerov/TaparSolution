@@ -39,7 +39,7 @@ namespace TaparSolution.Operations
             {
 
 
-                var requestRelatedMessage =  Parameter._db.GetAllPartnerMessageByCurrentRequest(long.Parse(requestnumber)).Result;
+                var requestRelatedMessage =  Parameter._db.GetAllPartnerMessageByCurrentRequest(long.Parse(requestnumber), Parameter.incoming.message.chat.id.ToString()).Result;
 
                 var mainMessageHistoryforEdit = requestRelatedMessage.FirstOrDefault(x => x.Type == "QueryToPartnerSent");
 

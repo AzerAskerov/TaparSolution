@@ -60,7 +60,7 @@ namespace TaparSolution.Controllers
           var chatmessages = await db.GetLastMessage(chatid.ToString());
             ComposedMessageTable LastMessage = null;
             if (chatmessages.Any())
-                LastMessage = chatmessages.OrderByDescending(x => x.messageid).FirstOrDefault();
+                LastMessage = chatmessages.Where(x => x.origin == "Partner").OrderByDescending(x => x.messageid).FirstOrDefault();
             #endregion
 
             #region Registeration
